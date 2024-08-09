@@ -1,0 +1,27 @@
+.container-login {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("./../../../../assets/register.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+.arrow-icon {
+  width: 40px; /* Ajusta el ancho según tus necesidades */
+  height: 40px; /* Ajusta la altura según tus necesidades */
+  margin-right: 5px; /* Espaciado a la derecha del botón */
+  
+}
+
+.log{
+  background-image:url("../../../../assets/adn4.jpg");
+  background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover ; /*cover*/
+    height: 90vh;
+}
+
+// .tex2{
+//   -webkit-text-stroke-width: 3px;
+//   -webkit-text-stroke-color: rgb(25, 195, 19);
+// }

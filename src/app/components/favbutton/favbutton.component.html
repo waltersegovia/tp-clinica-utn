@@ -1,0 +1,20 @@
+<div class="container">
+    <input type="checkbox" id="btn-mas">
+    <div class="redes">
+        <div *ngFor="let data of dataArray" >
+            <a (click)="handleLinkClick(data.mail,data.contrasena)">
+                <img [src]="data.img" alt="Imagen" class="full-width-height"> 
+            </a>
+        </div>
+        
+    </div>
+    <div class="btn-mas">
+        <label for="btn-mas">+</label>
+    </div>
+</div>
+
+<!-- ****************************************************************************************** -->
+
+<!-- <div class="container">
+   
+</div> -->

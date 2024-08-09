@@ -1,0 +1,37 @@
+<div class="card mt-5 scroll-container" #scrollContainer style="
+  overflow: auto; 
+  height: 550px; 
+  width: 98%;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;">
+
+    <div class="card-body" [@slideInOut]="isVisible ? 'in' : 'void'">
+        <h2 class="card-title text-center">
+            DISPONIBILIDAD LABORAL
+        </h2>
+
+        <table>
+            <thead>
+              <tr>
+                <th *ngFor="let day of daysOfWeek">{{ day }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let week of calendar">
+                <td *ngFor="let day of week" (click)="selectDate(day)" [ngClass]="{'selected': day === selectedDate}">{{ day.getDate() }}</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          
+          
+
+
+
+
+
+    </div>
+
+
+</div>

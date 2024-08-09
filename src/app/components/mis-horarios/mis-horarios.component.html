@@ -1,0 +1,82 @@
+<!-- <div class="mt-5">
+    <h4 class="text-center">Atiende los:</h4>
+    <div class="d-flex justify-content-between mt-4">
+        <div *ngFor="let item of this.agenda; index as i">
+            <input
+                type="checkbox"
+                class="btn-check"
+                id="btn-check-outlined"
+                [id]="'btn-check-' + i"
+                autocomplete="off"
+                [value]="i"
+                [checked]="item"
+                [disabled]="i === 0"
+                (click)="onDiaClickeado(i)"
+            >
+            <label
+                class="btn btn-outline-primary"
+                [for]="'btn-check-' + i"
+            >{{ this.semana[i] }}</label><br>
+        </div>
+    </div>
+    <div class="text-end mt-5">
+        <button
+            class="btn btn-outline-light"
+            (click)="confirmar()"
+        >Confirmar cambios</button>
+    </div>
+</div> -->
+<!-- continuar con el modal mañan-->
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Atiende los:</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="onCloseModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
+            <div class="d-flex justify-content-between mt-4">
+                <div *ngFor="let item of this.agenda; index as i">
+                    <input
+                        type="checkbox"
+                        class="btn-check"
+                        id="btn-check-outlined"
+                        [id]="'btn-check-' + i"
+                        autocomplete="off"
+                        [value]="i"
+                        [checked]="item"
+                        [disabled]="i === 0"
+                        (click)="onDiaClickeado(i)"
+                    >
+                    <label
+                        class="btn btn-outline-primary"
+                        [for]="'btn-check-' + i"
+                    >{{ this.semana[i] }}</label><br>
+                </div>
+            </div>
+            <div class="text-end mt-5">
+                <button
+                    class="btn btn-outline-light"
+                    (click)="confirmar()"
+                >Confirmar cambios</button>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            (click)="onCloseModal()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

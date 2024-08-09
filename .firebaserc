@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "tp-clinica-utn",
+    "tp-clinica-utn": "tp-clinica-utn"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

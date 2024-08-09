@@ -1,0 +1,28 @@
+<div class="scroll-container" (scroll)="onScroll($event)">
+    <div>
+        <button class="btn position-absolute top-0 start-0 m-3" (click)="goBack()">
+            <img src="../../../../assets/flecha-izquierda.png" alt="Flecha Izquierda" class="arrow-icon" />
+        </button>
+    </div>
+    
+    <div class="container marketing container2 torta" [@fadeInOut]>
+        <h2 class="border-bottom pb-2 mb-0 h2">Entradas de Logs</h2>
+        <table class="table">
+    
+            <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Email</th>
+            </tr>
+    
+            <tr *ngFor="let log of logins">
+    
+                <!-- <td>{{ log.fecha | formatDate }}</td> -->
+                <!-- <td>{{ log.fecha }}</td> -->
+                <!-- <td>{{ log.fecha | logs }}</td> -->
+                <td>{{log.fecha.toDate() | date:'MM/dd HH:mm'}}</td>
+                <td>{{ log.email}}</td>
+            </tr>
+    
+        </table>
+    </div>
+</div>

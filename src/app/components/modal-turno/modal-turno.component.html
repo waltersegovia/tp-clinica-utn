@@ -1,0 +1,466 @@
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 *ngIf="estado === 'cancelar'" class="modal-title">
+          ¿Esta seguro que deseas cancelar?
+        </h4>
+        <h4 *ngIf="estado === 'resena'" class="modal-title">Ver reseña</h4>
+        <h4 *ngIf="estado === 'calificar'" class="modal-title">
+          Calificar Atención
+        </h4>
+        <h4 *ngIf="estado === 'encuesta'" class="modal-title">Encuesta</h4>
+        <h4 *ngIf="estado === 'rechazado'" class="modal-title">
+          Rechazar Turno
+        </h4>
+        <h4 *ngIf="estado === 'finalizado'" class="modal-title">
+          Finalizar Turno
+        </h4>
+        <h4 *ngIf="estado === 'historial'" class="modal-title">
+          Historial Clinica
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="onCloseModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div *ngIf="estado === 'cancelar'">
+            <p>Debe dejar un comentario del porque se cancela el turno.</p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea
+                class="form-control"
+                id="message-text"
+                name="mensajeCancelacion"
+                [(ngModel)]="mensaje"
+              ></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'resena'">
+            <p>{{ data?.reviewEsp }}</p>
+          </div>
+          <div *ngIf="estado === 'calificar'">
+            <p>
+              Debe dejar un comentario de como fue la atención del Especialista.
+            </p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea
+                class="form-control"
+                id="message-text"
+                name="mensajeCancelacion"
+                [(ngModel)]="mensaje"
+              ></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'encuesta'">
+            <p>¿Por que razon nos recomendarias?</p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea
+                class="form-control"
+                id="message-text"
+                name="mensajeCancelacion"
+                [(ngModel)]="mensaje"
+              ></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'rechazado'">
+            <p>
+              Para rechazar el turno se debe dejar un comentario del porque se
+              rechaza el mismo.
+            </p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea
+                class="form-control"
+                id="message-text"
+                name="mensajeCancelacion"
+                [(ngModel)]="mensaje"
+              ></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'finalizado'">
+            <p>
+              Para finalizar el turno se debe dejar una reseña o comentario de
+              la consulta y diagnóstico realizado.
+            </p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea
+                class="form-control"
+                id="message-text"
+                name="mensajeCancelacion"
+                [(ngModel)]="mensaje"
+              ></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'historial'">
+            <form
+              (ngSubmit)="addHistorialClinica()"
+              [formGroup]="historial"
+              class="needs-validation"
+              novalidate
+            >
+              <div class="row g-3">
+                <div class="col-6">
+                  <label for="altura" class="form-label">Altura</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="altura"
+                    formControlName="altura"
+                  />
+                  <span
+                    *ngIf="
+                      historial.get('altura')?.hasError('required') &&
+                      historial.get('altura')?.touched
+                    "
+                    class="text-danger"
+                  >
+                    La <strong>Altura</strong> es requerido</span
+                  >
+                </div>
+                <div class="col-6">
+                  <label for="peso" class="form-label">Peso</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="peso"
+                    formControlName="peso"
+                  />
+                  <span
+                    *ngIf="
+                      historial.get('peso')?.hasError('required') &&
+                      historial.get('peso')?.touched
+                    "
+                    class="text-danger"
+                  >
+                    EL <strong>peso</strong> es requerido</span
+                  >
+                </div>
+                <div class="col-6">
+                  <label for="temperatura" class="form-label"
+                    >Temperatura</label
+                  >
+                  <input
+                    id="temperatura"
+                    type="number"
+                    class="form-control"
+                    formControlName="temperatura"
+                  />
+                  <span
+                    *ngIf="
+                      historial.get('temperatura')?.hasError('required') &&
+                      historial.get('temperatura')?.touched
+                    "
+                    class="text-danger"
+                  >
+                    La <strong>Temperatura</strong> es requerido</span
+                  >
+                </div>
+                <div class="col-6">
+                  <label for="presion" class="form-label">Presion</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="presion"
+                  />
+                  <span
+                    *ngIf="
+                      historial.get('presion')?.hasError('required') &&
+                      historial.get('presion')?.touched
+                    "
+                    class="text-danger"
+                  >
+                    La <strong>presion</strong> es requerida
+                  </span>
+                </div>
+              </div>
+
+              <hr />
+              <h4>Dato Dinámico</h4>
+              <div class="input-group p-2">     
+                <button 
+                  type="button" 
+                  class="btn btn-primary" 
+                  (click)="agregarDatoDinamico()"
+                  [disabled]="selectedValue === ''">
+                  Agregar
+                </button>
+                <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon" (change)="onSelectChange($event)">
+                  <option selected></option>
+                  <option value="controlRango">Rango</option>
+                  <option value="controlTexto">Texto</option>
+                  <option value="controlNumerico">Numerico</option>
+                  <option value="controlSwitch">Switch</option>
+                </select>
+              </div>
+              <!-- {{dato.get('clave')?.value}} -->
+              <div formArrayName="datosDinamicos">
+                <div *ngFor="let dato of getDatosDinamicos().controls; let i = index" [formGroupName]="i" class="row g-3">
+                  <div class="col-5">
+                    <label for="clave{{i}}" class="form-label">Clave</label>
+                    <input id="clave{{i}}" type="text" class="form-control" formControlName="clave">
+                  </div>
+                  <div class="col-5">
+                    <ng-container [ngSwitch]="dato.get('tipo')?.value">
+                      <div *ngSwitchCase="'controlRango'">
+                        <label for="valor{{i}}" class="form-label">Valor ({{dato.get('valor')?.value}}-100)</label>
+                        <input id="valor{{i}}" type="range" class="form-range" formControlName="valor" min="0" max="100">
+                      </div>
+                      <div *ngSwitchCase="'controlTexto'">
+                        <label for="valor{{i}}" class="form-label">Valor</label> 
+                        <input id="valor{{i}}" type="text" class="form-control" formControlName="valor">
+                      </div>
+                      <div *ngSwitchCase="'controlNumerico'">
+                        <label for="valor{{i}}" class="form-label">Valor</label> 
+                        <input id="valor{{i}}" type="number" class="form-control" formControlName="valor">
+                      </div>
+                      <div *ngSwitchCase="'controlSwitch'" >
+                        <label for="valor{{i}}" class="form-label">Valor</label> 
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" role="switch" id="valor{{i}}" formControlName="valor">
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                  <div class="col-2">
+                    <button type="button" class="btn btn-danger mt-4" (click)="eliminarDatoDinamico(i)">X</button>
+                  </div>
+                </div>
+              </div>
+          
+              <hr class="my-4" />
+              <button
+                class="w-100 btn btn-lg"
+                style="background-color: #0d689d; color: white"
+                type="submit"
+                [disabled]="!historial.valid"
+              >
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              <span *ngIf="!loading">Agregar</span>
+              </button>
+            </form>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          *ngIf="!(estado == 'historial')"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="onCloseModal()"
+        >
+          Cancelar
+        </button>
+        <button
+          *ngIf="
+            estado == 'cancelar' ||
+            estado == 'calificar' ||
+            estado == 'encuesta' ||
+            estado == 'rechazado' ||
+            estado == 'finalizado'
+          "
+          type="button"
+          class="btn btn-danger"
+          [disabled]="!isMensajePresente()"
+          (click)="cancelarTurno()"
+        >
+          Comfirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 *ngIf="estado === 'cancelar'" class="modal-title">
+          ¿Esta seguro que deseas cancelar?
+        </h4>
+
+        <h4 *ngIf="estado === 'resena'" class="modal-title">
+          Ver reseña
+        </h4>
+
+        <h4 *ngIf="estado === 'calificar'" class="modal-title">
+          Calificar Atención
+        </h4>
+
+        <h4 *ngIf="estado === 'encuesta'" class="modal-title">
+          Encuesta
+        </h4>
+
+        <h4 *ngIf="estado === 'rechazado'" class="modal-title">
+          Rechazar Turno
+        </h4>
+
+        <h4 *ngIf="estado === 'finalizado'" class="modal-title">
+          Finalizar Turno
+        </h4>
+
+        <h4 *ngIf="estado === 'historial'" class="modal-title">
+          Historial Clinica
+        </h4>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="onCloseModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div *ngIf="estado === 'cancelar'">
+            <p>Debe dejar un comentario del porque se cancela el turno.</p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text" name="mensajeCancelacion"
+                [(ngModel)]="mensaje"></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'resena'">
+            <p>{{ data?.reviewEsp }}</p>
+          </div>
+          <div *ngIf="estado === 'calificar'">
+            <p>
+              Debe dejar un comentario de como fue la atención del Especialista.
+            </p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text" name="mensajeCancelacion"
+                [(ngModel)]="mensaje"></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'encuesta'">
+            <p>¿Por que razon nos recomendarias?</p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text" name="mensajeCancelacion"
+                [(ngModel)]="mensaje"></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'rechazado'">
+            <p>
+              Para rechazar el turno se debe dejar un comentario del porque se
+              rechaza el mismo.
+            </p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text" name="mensajeCancelacion"
+                [(ngModel)]="mensaje"></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'finalizado'">
+            <p>
+              Para finalizar el turno se debe dejar una reseña o comentario de
+              la consulta y diagnóstico realizado.
+            </p>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text" name="mensajeCancelacion"
+                [(ngModel)]="mensaje"></textarea>
+            </div>
+          </div>
+          <div *ngIf="estado === 'historial'">
+            <form (ngSubmit)="addHistorialClinica()" [formGroup]="historial" class="needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-6">
+                  <label for="altura" class="form-label">Altura</label>
+                  <input type="number" class="form-control" id="altura" formControlName="altura" />
+                  <span *ngIf="
+                      historial.get('altura')?.hasError('required') &&
+                      historial.get('altura')?.touched
+                    " class="text-danger">
+                    La <strong>Altura</strong> es requerido</span>
+                </div>
+                <div class="col-6">
+                  <label for="peso" class="form-label">Peso</label>
+                  <input type="number" class="form-control" id="peso" formControlName="peso" />
+                  <span *ngIf="
+                      historial.get('peso')?.hasError('required') &&
+                      historial.get('peso')?.touched
+                    " class="text-danger">
+                    EL <strong>peso</strong> es requerido</span>
+                </div>
+                <div class="col-6">
+                  <label for="temperatura" class="form-label">Temperatura</label>
+                  <input id="temperatura" type="number" class="form-control" formControlName="temperatura" />
+                  <span *ngIf="
+                      historial.get('temperatura')?.hasError('required') &&
+                      historial.get('temperatura')?.touched
+                    " class="text-danger">
+                    La <strong>Temperatura</strong> es requerido</span>
+                </div>
+                <div class="col-6">
+                  <label for="presion" class="form-label">Presion</label>
+                  <input type="number" class="form-control" formControlName="presion" />
+                  <span *ngIf="
+                      historial.get('presion')?.hasError('required') &&
+                      historial.get('presion')?.touched
+                    " class="text-danger">
+                    La <strong>presion</strong> es requerida
+                  </span>
+                </div>
+              </div>
+              <hr />
+              <h4>Dato Dinámico</h4>
+              <div class="row g-3">
+                <div class="col-6">
+                  <label for="clave1" class="form-label">Clave</label>
+                  <input id="clave1" type="text" class="form-control" formControlName="clave1" />
+                </div>
+                <div class="col-6">
+                  <label for="valor1" class="form-label">Valor</label>
+                  <input type="valor1" class="form-control" formControlName="valor1" />
+                </div>
+              </div>
+
+              <hr class="my-4" />
+
+              <button class="w-100 btn btn-lg" style="background-color: #0d689d; color: white" type="submit"
+                [disabled]="!historial.valid">
+                Agregar
+              </button>
+
+            </form>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="!(estado == 'historial')" type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          (click)="onCloseModal()">
+          Cancelar
+        </button>
+        <button *ngIf="
+            estado == 'cancelar' ||
+            estado == 'calificar' ||
+            estado == 'encuesta' ||
+            estado == 'rechazado' ||
+            estado == 'finalizado'
+          " type="button" class="btn btn-danger" [disabled]="!isMensajePresente()" (click)="cancelarTurno()">
+          Comfirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->

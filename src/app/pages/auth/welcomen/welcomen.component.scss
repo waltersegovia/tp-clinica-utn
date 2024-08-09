@@ -1,0 +1,40 @@
+.contenedor {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("./../../../../assets/register.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    text-align: center;
+    color: #fff;
+    display: flex;
+}
+a {
+    margin-right: 10px;
+}
+
+.btn{
+    //border-top-left-radius: 50%;
+    //display: inline;
+    margin: 25px 0px;
+    margin-top: 10px;
+    padding: 25px 10px;
+    border-radius: 100px;
+    font-size: 15px;
+    background-color: rgb(119, 121, 125);
+}
+
+.btn2{
+    //border-top-left-radius: 50%;
+    //display: inline;
+    margin-top: 10px;
+    margin: 25px 0px;
+    padding: 30px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    background-color: rgb(119, 121, 125);
+}
+
+.ico{
+    margin-left: 83%;
+}

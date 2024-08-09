@@ -1,0 +1,44 @@
+<section class="container">
+
+  <!-- <div class="my-3 p-3 bg-body rounded shadow-sm form-pend"> -->
+    <h2 class="border-bottom pb-2 mb-0">Especialista Pendiente</h2>
+    <table class="table">
+      <!-- <thead> -->
+        <!-- <tr> -->
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <!-- <th scope="col">Correo</th>
+          <th scope="col">DNI</th> -->
+          <th scope="col">Especialidad</th>
+          <th scope="col">Acción</th>
+        <!-- </tr> -->
+      <!-- </thead> -->
+      <!-- <tbody class="form-pend"> -->
+        <tr class="form-pend" *ngFor="let profesional of profPendientes">
+          <td>{{ profesional.nombre }}</td>
+          <td>{{ profesional.apellido }}</td>
+          <!-- <td>{{ profesional.mail }}</td>
+          <td>{{ profesional.dni }}</td> -->
+          <td>{{ profesional.especialidades }}</td>
+          <td>
+            <button class="btn btn1 btn-sm btn-danger" (click)="aceptarRechazar(profesional.id || '','Aprobado')">Aceptar</button>
+            <button class="btn btn2 btn-sm btn-success" (click)="aceptarRechazar(profesional.id || '','Rechazado')">Rechazar</button>
+            <button
+              class="btn btn3 btn-sm btn-info"
+              (click)="setSelectedItem(profesional)"
+            >
+              Ver mas
+            </button>
+          </td>
+        </tr>
+      <!-- </tbody> -->
+    </table>
+  <!-- </div> -->
+  <hr />
+  <app-modal-usuario
+    *ngIf="selectedItem"
+    [data]="selectedItem"
+    (closeModal)="setSelectedItem(null)"
+  >
+  </app-modal-usuario>
+</section>

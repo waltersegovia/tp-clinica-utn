@@ -1,0 +1,23 @@
+<div class="card mb-3" style="max-width: 360px;" [ngClass]="{ 'disabled': isDisabled }">
+    <div class="row g-0">
+      <div class="col-md-9">
+        <div class="card-body">
+          <div class="form-check m-0 p-0">
+            <input 
+              class="form-check-input custom-checkbox m-0 p-0 mx-2" 
+              type="checkbox" 
+              value="" 
+              id="defaultCheck1"
+              [disabled]="isDisabled" 
+              [(ngModel)]="isChecked" 
+              (change)="onCaptchaChange()"
+              >
+            <label class="form-check-label" for="defaultCheck1">No soy un robot</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex justify-content-center">
+        <img src="../../../assets/recapchat.png" class="img-fluid rounded-start" alt="recapchat" width="70">
+      </div>
+    </div>
+  </div>
