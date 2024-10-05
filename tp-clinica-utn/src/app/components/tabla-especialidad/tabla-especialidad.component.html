@@ -1,0 +1,136 @@
+<section>
+  <!-- class="btn btn-primary" -->
+  <button
+    type="button"
+    style="color: whitesmoke;"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    data-bs-whatever="@mdo"
+    class="w-100 btn btn-lg btn btn-primary"
+  >
+    Agregar Especialidad
+  </button>
+  
+  <hr />
+
+  <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="espec text-primary">Especialidades</span>
+  </h4>
+
+  <!-- <form class="card p-2">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Promo code" />
+      <button type="submit" class="btn btn-secondary">Redeem</button>
+    </div>
+  </form> -->
+
+  <ul class="list-group" *ngFor="let especialidad of especialidades">
+    <li
+      class="list-group-item d-flex justify-content-start lh-sm"
+      [ngClass]="{ selected: isSelected(especialidad) }"
+      (click)="selectObjeto(especialidad)"
+    >
+      <div>
+        <h6 class="my-0 p-2">{{ especialidad.nombre }}</h6>
+        <p class="my-0 p-2" style="font-size: 10px;">{{ especialidad.description }}</p>
+      </div>
+    </li>
+  </ul>
+
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nueva Especialidad</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="newEspecialidad" *ngIf="!loading">
+            <div class="mb-3">
+              <div class="col-12">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input
+                  id="nombre"
+                  type="text"
+                  class="form-control"
+                  placeholder="Ingrese nombre"
+                  formControlName="nombre"
+                />
+                <span
+                  *ngIf="
+                    newEspecialidad.get('nombre')?.hasError('required') &&
+                    newEspecialidad.get('nombre')?.touched
+                  "
+                  class="text-danger"
+                >
+                  EL <strong>Nombre</strong> es requerido</span
+                >
+                <span
+                  *ngIf="
+                    newEspecialidad.get('nombre')?.hasError('minlength') &&
+                    newEspecialidad.get('nombre')?.touched
+                  "
+                  class="text-danger"
+                >
+                  EL <strong>Nombre</strong> Debe ser mas de 3 caracteres</span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="col-12">
+                <label for="description" class="form-label">Descripcion</label>
+                <textarea
+                  id="description"
+                  class="form-control"
+                  formControlName="description"
+                  rows="3"
+                ></textarea>
+                <span
+                  *ngIf="
+                    newEspecialidad.get('description')?.hasError('required') &&
+                    newEspecialidad.get('description')?.touched
+                  "
+                  class="text-danger"
+                >
+                  La <strong>Descripcion</strong> es requerida</span
+                >
+              </div>
+            </div>
+          </form>
+          <div class="d-flex justify-content-center align-items-center" *ngIf="loading">
+            <app-spinner></app-spinner> 
+          </div>
+        </div>
+        <div class="modal-footer" *ngIf="!loading">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addEspecialidad()"
+            [disabled]="!newEspecialidad.valid"
+          >
+            Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

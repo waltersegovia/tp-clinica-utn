@@ -1,0 +1,28 @@
+<tr *ngFor="let turno of turnos">
+  <td>{{ turno.especialidad }}</td>
+  <td *ngIf="miRol === 'Profesional' || miRol === 'Administrador'">
+    {{ turno.paciente.nombre }} {{ turno.paciente.apellido }}
+  </td>
+  <td *ngIf="miRol === 'Paciente' || miRol === 'Administrador'">
+    {{ turno.especialista.nombre }} {{ turno.especialista.apellido }}
+  </td>
+  <td *ngIf="turno.historial">
+    <span><strong>Altura: </strong>{{ turno.historial.altura }} - </span>
+    <span><strong>Peso: </strong>{{ turno.historial.peso }} - </span>
+    <span><strong>Temperatura: </strong>{{ turno.historial.temperatura }}</span>
+
+    <tr>
+      <span><strong>Presión: </strong>{{ turno.historial.presion }} - </span>
+    </tr>
+
+    <tr *ngFor="let datoD of turno.historial.datosDinamicos">
+      <td>{{ datoD["clave"] | formatKeyValue }}: {{ datoD["valor"] }}</td>
+    </tr>
+  </td>
+
+  <td *ngIf="!turno.historial">
+    <p>Sin Historial</p>
+  </td>
+  <td>{{ turno.fecha }}</td>
+  <td>{{ turno.hora }}</td>
+</tr>

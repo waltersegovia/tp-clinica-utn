@@ -1,0 +1,124 @@
+<div class="container marketing" (scroll)="onScroll($event)">
+  <!-- ********************************* -->
+  <!-- <button class="mb-3 btn" type="button" class="btn btn-primary" routerLink="/logo-grafico" style="margin-bottom: 15px">
+    Entrada login
+  </button> -->
+  <!-- (click)="crearPdf()" -->
+
+  <!-- <button class="mb-3 btn" type="button" class="btn btn-primary" routerLink="/turno-esp-graf" style="margin-bottom: 15px">
+    Turnos por especialidad
+  </button>
+
+  <button class="mb-3 btn" type="button" class="btn btn-primary" routerLink="/turno-dia-graf" style="margin-bottom: 15px">
+    Cantidad de turnos por dia
+  </button>
+
+  <button class="mb-3 btn" type="button" class="btn btn-primary" routerLink="/turno-lapso-graf" style="margin-bottom: 15px">
+    Turnos solicitados por lapso de tiempo
+  </button>
+
+  <button class="mb-3 btn" type="button" class="btn btn-primary" routerLink="/turno-fin-graf" style="margin-bottom: 15px">
+    Turnos finalizados por lapso de tiempo
+  </button> -->
+  <!-- ********************************** -->
+  <div class="row">
+
+    <div class="col-4">
+
+      <div class="row">
+
+
+        <div class="col-lg-6" *ngFor="let paciente of pacientes">
+          <button class="button-img" (click)="handlePatientClick(paciente)" [@slideIn]> <!--baja la foto-->
+
+            <img *ngIf="paciente.imagen; else placeholder" src="{{ paciente.imagen }}"
+              class="bd-placeholder-img rounded-circle" width="140" height="140" alt="Paciente Image" />
+
+            <ng-template #placeholder>
+              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#777" />
+                <text x="50%" y="50%" fill="#777" dy=".3em">100x100</text>
+              </svg>
+            </ng-template>
+            <div>
+              <h2>{{ paciente.nombre }}</h2>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-8">
+
+      <!-- *********************************************************************************** -->
+      <div *ngIf="turnos.length > 0" [@slideInFromBottom]>
+        <div class="paciente">
+          <div *ngFor="let turno of turnos; let i = index">
+            <div *ngIf="i==0">
+              <p style="color: aliceblue; font-size: 30px;">{{turno.paciente.nombre +' '+ turno.paciente.apellido}}</p>
+              <button *ngIf="i==0" type="button" class="btn btn-primary"
+                routerLink="/admin/solicitar-turno/{{turno.idPac}}" style="margin-bottom: 15px">
+                Solicitar Turno
+              </button>
+            </div>
+
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="crearPdf()" style="margin-bottom: 15px">
+            Descargar PDF
+          </button>
+        </div>
+
+
+        <div *ngIf="miRol === 'Paciente' || miRol === 'Administrador'" class="mb-4">
+          <label class="mb-2" style="color: whitesmoke;"> Buscar por especialidad o especialista </label>
+          <input [(ngModel)]="filtro" (ngModelChange)="pacienteFiltrar()" class="form-control w-50" />
+        </div>
+
+        <!-- <div *ngIf="miRol === 'Paciente' || miRol === 'Administrador'" class="mb-4">
+          <label class="mb-2"> Buscar por especialidad o especialista </label>
+          <input [(ngModel)]="filtro" (ngModelChange)="pacienteFiltrar()" class="form-control w-50" appEjercicioC />
+        </div> -->
+
+        <table class="appointments-table">
+          <tr>
+            <th>Horario</th>
+            <th>Doctor</th>
+            <th>Especialidad</th>
+            <th>Estado</th>
+            <th>Motivo</th>
+          </tr>
+          <tr *ngFor="let turno of turnos; let i = index">
+            <!--Admin no ve los finalizados ni rechazados-->
+            <ng-container *ngIf=" turno.estado !== 'finalizado'">
+              <ng-container *ngIf=" turno.estado !== 'rechazado'">
+                <td>{{ turno.fecha + " - " + turno.hora }}</td>
+                <td>
+                  {{ turno.especialista.nombre }}
+                  {{ turno.especialista.apellido }}
+                </td>
+                <td>{{ turno.especialidad }}</td>
+                <td>{{ turno.estado | uppercase }}</td>
+                <td class="tdMotivo">{{ turno.razon }}</td>
+                <td *ngIf="turno.reviewEsp">
+                  <button class="btn btn-info" (click)="verReviewHandler(turno)">
+                    Ver reseña
+                  </button>
+                </td>
+              </ng-container>
+            </ng-container>
+          </tr>
+        </table>
+      </div>
+      <!-- *********************************************************************************** -->
+
+    </div>
+
+  </div>
+  <app-modal-turno *ngIf="turnoSeleccionado && estado == 'resena'" [data]="turnoSeleccionado" [estado]="estado"
+    (closeModal)="verReviewHandler(null)">
+  </app-modal-turno>
+</div>

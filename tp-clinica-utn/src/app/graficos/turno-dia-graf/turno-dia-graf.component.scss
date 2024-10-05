@@ -1,0 +1,29 @@
+#chart {
+    width: 600px; /* Ancho deseado */
+    height: 500px; /* Alto deseado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Posicionamiento relativo */
+  }
+
+.torta{
+    width: 900px; /* Ancho deseado */
+    height: 900px; /* Alto deseado */ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Posicionamiento relativo */
+    left: 320px; /* Desplazar 200px hacia la derecha */
+}
+
+.btn{
+    margin: 10px; /* Espacio de 10px alrededor de cada botón */
+}
+
+.arrow-icon {
+    width: 60px; /* Ajusta el ancho según tus necesidades */
+    height: 60px; /* Ajusta la altura según tus necesidades */
+    margin-right: 0px; /* Espaciado a la derecha del botón */
+    
+  }

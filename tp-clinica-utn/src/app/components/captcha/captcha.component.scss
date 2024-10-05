@@ -1,0 +1,23 @@
+.custom-checkbox{
+    width: 30px;
+    height: 30px;
+    border-width: 2px;
+    border-color: black;
+  
+    background-color: rgb(61, 34, 185);
+}
+
+.disabled {
+    pointer-events: none; /* Deshabilita clics, inputs, etc. */
+    opacity: 0.6; /* Cambia la opacidad para dar la apariencia de deshabilitado */
+  }
+  
+  .disabled input,
+  .disabled button {
+    cursor: not-allowed; /* Cambia el cursor para indicar que está deshabilitado */
+    background-color: #e9ecef; /* Cambia el fondo de los botones e inputs para indicar deshabilitación */
+  }
+  
+  .disabled img {
+    filter: grayscale(100%); /* Aplica un filtro de escala de grises a la imagen */
+  }

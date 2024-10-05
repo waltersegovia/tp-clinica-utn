@@ -1,0 +1,61 @@
+.captcha {
+    display: flex; 
+ }
+ 
+ .btnCapt {
+     width: 20%;
+     //width: 150px;
+     height: 40px;
+     padding: 5px;
+     font-size: 12px;
+     border-radius: 8px;
+     color: whitesmoke;
+     background-color: rgba(79, 79, 81, 0.418);
+     margin-top: 22px;
+     margin-left: 59px !important;
+ }
+ 
+ .btnCapt2 {
+     position: relative;
+     z-index: 1;
+     overflow: hidden; 
+     
+ }
+ 
+ .text-danger{
+ color: red !important;
+ }
+
+
+// .captcha {
+//    display: flex; 
+// }
+
+// .btnCapt {
+//     width: 5%;
+//     //width: 150px;
+//     height: 40px;
+//     padding: 5px;
+//     font-size: 12px;
+//     border-radius: 8px;
+//     color: whitesmoke;
+//     background-color: rgb(10, 10, 109);
+//     margin-top: 22px;
+// }
+
+// .btnCapt2 {
+//     width: 25%;
+//     //width: 150px;
+//     height: 33px;
+//     padding: 5px;
+//     font-size: 12px;
+//     border-radius: 8px;
+//     //color: whitesmoke;
+//     //background-color: rgb(10, 10, 109);
+//     margin-top: 5px;
+//     margin-left: 10px;
+// }
+
+// .text-danger{
+// color: red !important;
+// }

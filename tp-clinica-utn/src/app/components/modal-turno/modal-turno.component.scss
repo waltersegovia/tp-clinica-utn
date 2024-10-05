@@ -1,0 +1,84 @@
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+.modal-content {
+  background-color:#3e4451;
+  .form-control{ 
+      background-color: #3e4451;
+      color: white;
+  }
+}
+.circular-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:#727272 ;
+}
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.input-group {
+  display: flex; /* Ensure button and select align nicely */
+  align-items: center; /* Vertical centering */
+  gap: 10px; /* Space between elements */
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: #007bff; /* Primary color (customize) */
+  color: white;
+  border: none;
+  padding: 10px 20px; 
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+.btn-primary:hover {
+  background-color: #0069d9; /* Slightly darker on hover */
+}
+
+/* Select Dropdown Styles */
+.form-select {
+  padding: 10px;
+  border: 1px solid #ced4da; /* Light gray border */
+  border-radius: 5px;
+  width: 200px; /* Adjust width as needed */
+}
+
+
+// .modal {
+//     display: block;
+//     background-color: rgba(0, 0, 0, 0.5);
+//     color: white;
+//   }
+//   .modal-content {
+//     background-color:#3e4451;
+//     .form-control{ 
+//         background-color: #3e4451;
+//         color: white;
+//     }
+//   }
+//   .circular-container {
+//     width: 120px;
+//     height: 120px;
+//     border-radius: 50%;
+//     overflow: hidden;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     background-color:#727272 ;
+//   }
+//   img{
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+//   }

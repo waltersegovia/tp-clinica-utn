@@ -1,0 +1,145 @@
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  url("./assets/register.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+}
+.scroll-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ajusta según tus necesidades */
+  overflow-y: auto; /* Habilita la barra de desplazamiento vertical si es necesario */
+}
+
+.container {
+  width: 100%;
+  padding: 20px; /* Ajusta según tus necesidades */
+}
+
+.contenedor-mayor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 95vh;
+  padding-top: 3rem;
+}
+.contenedor-menor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 2rem 3rem;
+  margin-bottom: 3rem;
+  // background: rgba(10, 10, 10, .9);
+  // border-radius: .6rem;
+}
+// .fondo-oscuro {
+//   background: rgba(10, 10, 10, .9);
+//   border-radius: .6rem;
+// }
+
+
+.centrado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// #chart {
+//   width: 6px; /* Set desired width */
+//   height: 4px; /* Set desired height */
+// }
+
+// @media (max-width: 100px) {
+//   #torta {
+//     width: 30px;
+//     height: 25px;
+//   }
+// }
+
+.form-pend {
+  background-color: transparent;
+}
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+
+
+
+// body {
+//   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+//   url("./assets/register.jpg");
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-size: cover;
+//   height: 100vh;
+//   overflow: hidden;
+// }
+// .scroll-container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 100vh; /* Ajusta según tus necesidades */
+//   overflow-y: auto; /* Habilita la barra de desplazamiento vertical si es necesario */
+// }
+
+// .container {
+//   width: 100%;
+//   padding: 20px; /* Ajusta según tus necesidades */
+// }
+
+// .contenedor-mayor {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   min-height: 95vh;
+//   padding-top: 3rem;
+// }
+// .contenedor-menor {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   color: white;
+//   padding: 2rem 3rem;
+//   margin-bottom: 3rem;
+//   // background: rgba(10, 10, 10, .9);
+//   // border-radius: .6rem;
+// }
+// // .fondo-oscuro {
+// //   background: rgba(10, 10, 10, .9);
+// //   border-radius: .6rem;
+// // }
+
+
+// .centrado {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// // #chart {
+// //   width: 6px; /* Set desired width */
+// //   height: 4px; /* Set desired height */
+// // }
+
+// // @media (max-width: 100px) {
+// //   #torta {
+// //     width: 30px;
+// //     height: 25px;
+// //   }
+// // }
+
+// .form-pend {
+//   background-color: transparent;
+// }
+// .grecaptcha-badge {
+//   visibility: hidden;
+// }

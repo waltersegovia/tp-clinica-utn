@@ -1,0 +1,161 @@
+<!--class="container mb-5 scroll-container" (scroll)="onScroll($event)" -->
+<div class="container mb-5">
+  <div class="row" style="width: auto;" *ngIf="!loading">
+    <div class="col-md-5 col-lg-4 order-md-last">
+      <app-tabla-especialidad (seleccionar)="seleccionarEspecialidad($event)"/>
+    </div>
+    <!-- class="col-12"  col-md-7 col-lg-8-->
+    <div class="col-lg-8">
+      <h4 class="mb-3">Registro del profesional</h4>
+      <form (ngSubmit)="addprofesional()" [formGroup]="profesional" class="needs-validation" novalidate>
+        <div class="row g-3">
+          <div class="col-12 col-lg-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName="nombre" />
+            <span *ngIf="
+                profesional.get('nombre')?.hasError('required') &&
+                profesional.get('nombre')?.touched
+              " class="text-danger">
+              EL <strong>nombre</strong> es requerido</span>
+            <span *ngIf="
+                profesional.get('nombre')?.hasError('minlength') &&
+                profesional.get('nombre')?.touched
+              " class="text-danger">
+              EL <strong>nombre</strong> debe tener mas 3 caracteres</span>
+          </div>
+          <div class="col-12 col-lg-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido"
+              formControlName="apellido" />
+            <span *ngIf="
+                profesional.get('apellido')?.hasError('required') &&
+                profesional.get('apellido')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> es requerido</span>
+            <span *ngIf="
+                profesional.get('apellido')?.hasError('minlength') &&
+                profesional.get('apellido')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> Debe ser mas de 3 caracteres</span>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label for="edad" class="form-label">Edad</label>
+            <input id="edad" type="text" class="form-control" placeholder="Ingrese edad" formControlName="edad" />
+            <span *ngIf="
+                profesional.get('edad')?.hasError('required') &&
+                profesional.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> es requerido</span>
+            <span *ngIf="
+                profesional.get('edad')?.hasError('min') &&
+                profesional.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> debe ser mayor o igual a 18 años.
+            </span>
+            <span *ngIf="
+                profesional.get('edad')?.hasError('max') &&
+                profesional.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> debe ser menor o igual a 99 años.
+            </span>
+            <span *ngIf=" profesional.get('edad')?.hasError('soloNumeros') 
+                    && profesional.get('edad')?.touched" class="text-danger">
+              La <strong>Edad</strong> solo permiten numeros
+            </span>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label for="dni" class="form-label">DNI</label>
+            <input type="text" class="form-control" placeholder="Ingrese DNI" formControlName="dni" />
+            <span *ngIf="profesional.get('dni')?.hasError('required') 
+                        && profesional.get('dni')?.touched" class="text-danger">
+              El <strong>DNI</strong> es requerido
+            </span>
+            <span *ngIf=" profesional.get('dni')?.hasError('soloNumeros') 
+                        && profesional.get('dni')?.touched" class="text-danger">
+              El <strong>DNI</strong> solo permiten numeros
+            </span>
+          </div>
+          <!-- especialidades -->
+          <div class="col-12">
+            <h5>Especialidades</h5>
+            <div style="white-space: nowrap;">
+              <div *ngFor="let especialidad of especialidades"
+                style="display: inline-block; white-space: normal; margin-right: 10px;">
+                <span class="badge rounded-pill text-bg-primary" style="font-size: 10px !important;">
+                  {{ especialidad }}
+                  <button class="btn-delete" (click)="eliminarElemento(especialidad)">X</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <label for="mail" class="form-label">Correo Electronico</label>
+            <input type="text" class="form-control" placeholder="Ingrese Correo Electronico" formControlName="mail" />
+            <span *ngIf="profesional.get('mail')?.hasError('required') 
+                        && profesional.get('mail')?.touched" class="text-danger">
+              El <strong>Correo Electronico</strong> es requerido
+            </span>
+            <span *ngIf=" profesional.get('mail')?.hasError('email') 
+                        && profesional.get('mail')?.touched" class="text-danger">
+              El <strong> Correo Electronico</strong> no tiene el formato correcto.
+            </span>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" placeholder="Ingrese Contraseña" formControlName="password" />
+            <span *ngIf="profesional.get('password')?.hasError('password') 
+                        && profesional.get('password')?.touched" class="text-danger">
+              La <strong> Contraseña </strong> es requerida
+            </span>
+            <span *ngIf=" profesional.get('password')?.hasError('minlength') 
+                        && profesional.get('password')?.touched" class="text-danger">
+              La <strong> Contraseña </strong> tiene que ser mayor a 6 caracteres.
+            </span>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <label for="image01n" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="image01n" placeholder="" (change)="uploadImage($event)" />
+          </div>
+          <hr class="my-4" />
+        </div>
+
+        
+
+        <div class="captcha">
+          <app-captcha class="btnCapt2" style="margin-top: 1px !important;" [isDisabled]="isCaptchaDisabled" (captchaChange)="onCaptchaChange($event)" />
+          <button class="btnCapt m-2" style="margin-left: 12% !important; margin-top: 23px !important;" (click)="captchaOnOff()" type="button" [disabled]="btnDisabled">Habilitar/Desabilitar (captcha)</button>    
+        </div>
+
+
+        <!-- <hr class="my-4" /> -->
+        
+        <button class="w-100 btn btn-lg" style="background-color: #0d689d; color: white; margin-top: 20% !important;" type="submit"
+          [disabled]="!profesional.valid || (isCaptchaDisabled ? false : !isCheck)">
+          Agregar
+        </button>
+
+       
+
+        <!-- <form style="margin-top: 5px;" class="mt-5"> -->
+          <!-- <ngx-recaptcha2 #captchaElem
+            [siteKey]="siteKey"
+            (success)="handleSuccess($event)"
+            >
+          </ngx-recaptcha2> -->
+        <!-- </form> -->
+
+      </form>
+
+    </div>
+  </div>
+
+
+  <div class="d-flex justify-content-center align-items-center vh-100" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+</div>

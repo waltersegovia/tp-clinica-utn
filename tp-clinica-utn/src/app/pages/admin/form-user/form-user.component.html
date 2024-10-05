@@ -1,0 +1,37 @@
+<div class="scroll-container" (scroll)="onScroll($event)"> <!-- class="scroll-container" (scroll)="onScroll($event)" -->
+  <div>
+    <button class="btn position-absolute top-0 start-0 m-3" (click)="goBack()">
+      <img src="../../../../assets/flecha-izquierda.png" alt="Flecha Izquierda" class="arrow-icon" />
+    </button>
+  </div>
+
+  <div class="card mt-4 formulario">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isClienteActive" (click)="mostrarClienteComponent()">Paciente</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isProfesionalActive" (click)="mostrarProfesionalComponent()">Profesional</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isAdmin" (click)="mostrarAdminComponent()">Administrador</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card-body fo">
+      <div *ngIf="isClienteActive">
+        <app-alta-pacientes></app-alta-pacientes>
+      </div>
+      <div *ngIf="isProfesionalActive">
+        <app-alta-profesionales></app-alta-profesionales>
+      </div>
+      <div *ngIf="isAdmin">
+        <app-alta-admin></app-alta-admin>
+      </div>
+    </div>
+  </div>
+</div>

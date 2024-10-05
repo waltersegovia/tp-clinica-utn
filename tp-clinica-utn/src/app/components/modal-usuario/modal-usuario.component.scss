@@ -1,0 +1,18 @@
+.modal {
+    display: block;
+  }
+  .circular-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#727272 ;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }

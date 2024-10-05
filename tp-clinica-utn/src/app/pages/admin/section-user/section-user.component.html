@@ -1,0 +1,254 @@
+<div class="scroll-container" (scroll)="onScroll($event)">
+  <div class="container">
+    <h2 class="border-bottom pb-2 mt-4 text-center" style="color: aliceblue;">Usuarios</h2>
+
+    <button class="my-custom-button" routerLink="/form-user">
+      Alta de Usuarios
+    </button>
+
+    <button class="my-custom-button logs" routerLink="/log">
+      Logs
+    </button>
+
+    <!-- <div class="contenedorGraf">
+  
+      <div class="charts-container mt-3">
+
+        <div class="chart-box" style="margin-left: 3%;">
+          <h1 class="titulo" style="color: rgb(178, 168, 21);">TURNOS POR ESPECIALIDAD</h1>
+          <canvas id="chart">{{chart}}</canvas>
+          <button id="c1" type="button" class="btn btn-primary" (click)="crearPdf('chart', '.titulo')"
+            style="width: 30%; font-size: 10px; background-color: rgb(35, 184, 42);">
+            Descargar PDF
+          </button>
+        </div>
+
+        <div></div>
+
+        <div class="chart-box" style="margin-right: 10%; ">
+          <h1 class="titulo2" style="color: rgb(178, 168, 21);">TURNOS POR DíA</h1>
+          <canvas id="chart2">{{chart}}</canvas>
+          <button id="c2" type="button" class="btn btn-primary" (click)="crearPdf('chart2', '.titulo2')"
+            style="width: 30%; font-size: 10px; background-color: rgb(35, 184, 42);;">
+            Descargar PDF
+          </button>
+        </div>
+
+      </div>
+
+      <div class="charts-container">
+        <div class="input-container" style="margin-left: 50px;">
+          <h1 class="titulo3" style="color: rgb(178, 168, 21);">TURNOS SOLCITADOS POR MÉDICO</h1>
+          <label class="lab" for="input1">Desde</label>
+          <input type="date" id="input1" name="input1" placeholder="dd/mm" [(ngModel)]="input1">
+
+          <label class="lab lab2" for="input2">Hasta</label>
+          <input type="date" id="input2" name="input2" placeholder="dd/mm" [(ngModel)]="input2">
+
+          <button class="env" (click)="handleButton()">Enviar</button>
+
+          <div class="chart-box">
+            <canvas id="chart3">{{chart}}</canvas>
+            <button id="c3" type="button" class="btn btn-primary" (click)="crearPdf('chart3', '.titulo3')"
+              style="width: 30%; font-size: 10px; background-color: rgb(35, 184, 42);">
+              Descargar PDF
+            </button>
+          </div>
+        </div>
+
+        <div class="input-container">
+          <h1 class="titulo4" style="color: rgb(178, 168, 21);">TURNOS FINALIZADOS POR EL MÉDICO</h1>
+          <label class="lab" for="input1f">Desde</label>
+          <input type="date" id="input1f" name="input1f" placeholder="dd/mm" [(ngModel)]="input1f">
+
+          <label class="lab lab2" for="input2f">Hasta</label>
+          <input type="date" id="input2" name="input2f" placeholder="dd/mm" [(ngModel)]="input2f">
+
+          <button class="env" (click)="handleButton2()">Enviar</button>
+
+          <div class="chart-box">
+            <canvas id="chart4">{{chart}}</canvas>
+            <button id="c4" type="button" class="btn btn-primary" (click)="crearPdf('chart4', '.titulo4')"
+              style="width: 30%; font-size: 10px; background-color: rgb(35, 184, 42);;">
+              Descargar PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div class="card">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="isClienteActive" (click)="mostrarClienteComponent()">Paciente</a>  
+            </li>
+  
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="isProfesionalActive" (click)="mostrarProfesionalComponent()">Profesional</a>
+            </li>
+  
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="isAdmin" (click)="mostrarAdminComponent()">Administrador</a>
+            </li>
+          </ul>   
+        </div>
+      
+      <div class="card-body">
+        <div *ngIf="isClienteActive">
+          <app-alta-pacientes></app-alta-pacientes>
+        </div>
+        <div *ngIf="isProfesionalActive">
+          <app-alta-profesionales></app-alta-profesionales>
+        </div>
+        <div *ngIf="isAdmin">
+          <app-alta-admin></app-alta-admin>
+        </div>
+      </div>
+    </div> -->
+
+
+
+  </div>
+
+  <app-list-prof-pendientes [profPendientes]="profPendientes"
+    (onAceptarRechazar)="onAceptarRechazar($event.id, $event.value)" />
+  <!-- <br /> -->
+  <!-- <br /> -->
+
+
+  <div class="container marketing container2">
+    <!-- <div class="my-3 p-3 bg-body rounded shadow-sm"> -->
+    <div>
+      <h2 class="border-bottom pb-2 mb-0 h2">Lista</h2>
+      <button id="c1" type="button" class="btn btn-primary mt-3" (click)="descargarExcel()"
+        style="width: 30%; font-size: 10px; background-color: rgb(35, 184, 42); width: 9%;">
+        Descargar Excel
+      </button>
+    </div>
+
+    <table class="table mb-3">
+      <!-- <thead> -->
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Correo</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Foto</th>
+        <th scope="col">Tipo</th>
+
+      </tr>
+      <!-- </thead> -->
+      <!-- <tbody> -->
+      <tr *ngFor="let usuario of usuarios" [appResaltarFila]="getColor(usuario)">
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.apellido }}</td>
+        <td>{{ usuario.mail }}</td>
+        <td>{{ usuario.dni }}</td>
+        <td>
+          <img class="img" *ngIf="usuario.imagen" [src]="usuario.imagen" alt="{{ usuario.nombre }}">
+
+          <!-- <div class="card" style="width: 18rem;">
+            <img *ngIf="usuario.imagen" [src]="usuario.imagen" class="card-img-top img" alt="{{ usuario.nombre }}">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div> -->
+
+        </td>
+        <td>{{ usuario.rol}}</td>
+
+        <!-- <tr *ngFor="let profesional of profPendientes"> -->
+        <!-- <td *ngFor="let profesional of profPendientes">
+                <button class="btn btn-sm btn-danger" (click)="aceptarRechazar2(profesional.id || '','Aprobado')">Aceptar</button>
+                <button class="btn btn-sm btn-success" (click)="aceptarRechazar2(profesional.id || '','Rechazado')">Rechazar</button>
+                <button
+                  class="btn btn-sm btn-info"
+                  (click)="setSelectedItem2(profesional)"
+                >
+                  Ver mas
+                </button>
+              </td> -->
+        <!-- </tr> -->
+
+      </tr>
+      <!-- </tbody> -->
+
+      
+
+
+    </table>
+
+    <div class="row g-2">
+      <div class="col-md-3 card-container" *ngFor="let usuario of usuarios">
+        <!-- <div class="mb-3" style="margin-right: 20px;"> -->
+          <div class="card" style="width: 13rem; margin: 1rem;">
+            <img *ngIf="usuario.imagen" [src]="usuario.imagen" class="card-img-top img" alt="{{ usuario.nombre }}">
+            <div class="card-body" style="background-image: url('../../../assets/azul-claro.jpg');">
+
+              <div *ngIf="usuario.rol === 'Profesional'">
+                <h5 class="card-title">{{ usuario | doctor}} </h5>
+              </div>
+              <div *ngIf="usuario.rol === 'Paciente'">
+                <h5 class="card-title">{{ usuario | paciente}} </h5>
+              </div>
+              <div *ngIf="usuario.rol === 'Administrador'">
+                <h5 class="card-title">{{ usuario | administrador}} </h5>
+              </div>
+
+              <p class="card-text" style="font-size: 11px;">{{ "DNI: "+usuario.dni }}<br> {{"Mail: "+
+                usuario.mail}}<br>{{ usuario.rol}}</p>
+              <a *ngIf="usuario.rol === 'Paciente'" (click)="crearPdfPaciente( usuario.id )" class="btn btn-primary" style="width: 45%; font-size: 10px;">Turnos PDF</a>
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+    </div>
+
+    <!-- <div class="torta">
+      <canvas id="chart">{{chart}}</canvas>
+    </div> -->
+    <!-- </div> -->
+
+    <!-- <button class="button-img"  (click)="descargarExcel()" [@slideIn]>
+          <img
+            *ngIf="paciente.imagen; else placeholder"
+            src="{{ paciente.imagen }}"
+            class="bd-placeholder-img rounded-circle"
+            width="140"
+            height="140"
+            alt="Paciente Image"
+          />
+          <ng-template #placeholder>
+            <svg
+              class="bd-placeholder-img rounded-circle"
+              width="140"
+              height="140"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Placeholder: 140x140"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#777" />
+              <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+            </svg>
+          </ng-template>
+          <div>
+            <h2>{{ paciente.nombre }}</h2>
+          </div>
+        </button> -->
+
+
+
+  </div>
+
+
+
+  <!-- <br />
+  <br />
+  <br /> -->
+</div>

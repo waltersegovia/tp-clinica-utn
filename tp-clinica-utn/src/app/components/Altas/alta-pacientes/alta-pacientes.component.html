@@ -1,0 +1,295 @@
+<div class="container mb-5 scroll-container" (scroll)="onScroll($event)">
+  <div class="row" *ngIf="!loading">
+    <div class="col-12">
+      <h4 class="mb-3" style="color: aqua;">Registro de paciente</h4>
+      <form (ngSubmit)="addPaciente()" [formGroup]="paciente" class="needs-validation" novalidate>
+        <div class="row g-3">
+          <div class="col-12 col-lg-4">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName="nombre" />
+            <span *ngIf="
+                paciente.get('nombre')?.hasError('required') &&
+                paciente.get('nombre')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> es requerido</span>
+            <span *ngIf="
+                paciente.get('nombre')?.hasError('minlength') &&
+                paciente.get('nombre')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> Debe ser mas de 3 caracteres</span>
+          </div>
+          <div class="col-12 col-lg-4">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido"
+              formControlName="apellido" />
+            <span *ngIf="
+                paciente.get('apellido')?.hasError('required') &&
+                paciente.get('apellido')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> es requerido</span>
+            <span *ngIf="
+                paciente.get('apellido')?.hasError('minlength') &&
+                paciente.get('apellido')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> Debe ser mas de 3 caracteres</span>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="edad" class="form-label">Edad</label>
+            <input id="edad" type="text" onlyNumber class="form-control" placeholder="Ingrese edad" formControlName="edad" /> <!-- Directiva  only-number -->
+            <span *ngIf="
+                paciente.get('edad')?.hasError('required') &&
+                paciente.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> es requerido</span>
+            <span *ngIf="
+                paciente.get('edad')?.hasError('min') &&
+                paciente.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> debe ser mayor o igual a 18 años.
+            </span>
+            <span *ngIf="
+                paciente.get('edad')?.hasError('max') &&
+                paciente.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> debe ser menor o igual a 99 años.
+            </span>
+            <span *ngIf=" paciente.get('edad')?.hasError('soloNumeros') 
+                    && paciente.get('edad')?.touched" class="text-danger">
+              La <strong>Edad</strong> solo permiten numeros
+            </span>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="dni" class="form-label">DNI</label>
+            <input type="text" class="form-control" placeholder="Ingrese DNI" formControlName="dni" />
+            <span *ngIf="paciente.get('dni')?.hasError('required') 
+                        && paciente.get('dni')?.touched" class="text-danger">
+              El <strong>DNI</strong> es requerido
+            </span>
+            <span *ngIf=" paciente.get('dni')?.hasError('soloNumeros') 
+                        && paciente.get('dni')?.touched" class="text-danger">
+              El <strong>DNI</strong> solo permiten numeros
+            </span>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="obraSocial" class="form-label">Obra social</label>
+            <select class="form-select" aria-label="Obra Social" formControlName="obraSocial">
+              <option [ngValue]="null">Selecciona una Obra Social</option>
+              <option *ngFor="let obraSocial of obraSociales" [ngValue]="obraSocial.nombre">{{ obraSocial.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="mail" class="form-label">Correo Electronico</label>
+            <input type="text" class="form-control" placeholder="Ingrese Correo Electronico" formControlName="mail" />
+            <span *ngIf="paciente.get('mail')?.hasError('required') 
+                        && paciente.get('mail')?.touched" class="text-danger">
+              El <strong>Correo Electronico</strong> es requerido
+            </span>
+            <span *ngIf=" paciente.get('mail')?.hasError('email') 
+                        && paciente.get('mail')?.touched" class="text-danger">
+              El <strong> Correo Electronico</strong> no tiene el formato correcto.
+            </span>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" placeholder="Ingrese Contraseña" formControlName="password" />
+            <span *ngIf="paciente.get('password')?.hasError('password') 
+                        && paciente.get('password')?.touched" class="text-danger">
+              La <strong> Contraseña </strong> es requerida
+            </span>
+            <span *ngIf=" paciente.get('password')?.hasError('minlength') 
+                        && paciente.get('password')?.touched" class="text-danger">
+              La <strong> Contraseña </strong> tiene que ser mayor a 6 caracteres.
+            </span>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="image01n" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="image01n" placeholder="" (change)="uploadImage($event)" />
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="image01n" class="form-label">
+              Imagen 2
+              <span class="text-muted" style="color: beige !;">(Opcional)</span>
+            </label>
+            <input type="file" class="form-control" id="image01n" placeholder="" (change)="uploadImage2($event)" />
+          </div>
+        </div>
+        
+        <!-- <hr class="my-4" /> justify-content-center -->
+        <div class="d-flex">
+          <app-captcha class="btnCapt2" [isDisabled]="isCaptchaDisabled" (captchaChange)="onCaptchaChange($event)" />
+          <button class="btnCapt m-2 mt-3" (click)="captchaOnOff()" type="button" [disabled]="btnDisabled">Habilitar/Desabilitar (captcha)</button>         
+        </div>
+        
+        <hr class="my-4" />
+        <button class="w-100 btn btn-lg" style="background-color: #0d689d; color: white" type="submit"
+          [disabled]="!paciente.valid || (isCaptchaDisabled ? false : !isCheck)">
+          Agregar
+        </button>
+
+      </form>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center vh-100" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div class="container mb-5">
+  <div class="row" *ngIf="!loading">
+    <div class="col-12">
+      <h4 class="mb-3">Registro de paciente</h4>
+      <form (ngSubmit)="addPaciente()" [formGroup]="paciente" class="needs-validation" novalidate>
+        <div class="row g-3">
+          <div class="col-12 col-lg-4">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName="nombre" />
+            <span *ngIf="
+                paciente.get('nombre')?.hasError('required') &&
+                paciente.get('nombre')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> es requerido</span>
+            <span *ngIf="
+                paciente.get('nombre')?.hasError('minlength') &&
+                paciente.get('nombre')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> Debe ser mas de 3 caracteres</span>
+          </div>
+          <div class="col-12 col-lg-4">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido"
+              formControlName="apellido" />
+            <span *ngIf="
+                paciente.get('apellido')?.hasError('required') &&
+                paciente.get('apellido')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> es requerido</span>
+            <span *ngIf="
+                paciente.get('apellido')?.hasError('minlength') &&
+                paciente.get('apellido')?.touched
+              " class="text-danger">
+              EL <strong>Nombre</strong> Debe ser mas de 3 caracteres</span>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="edad" class="form-label">Edad</label>
+            <input id="edad" type="text" class="form-control" placeholder="Ingrese edad" formControlName="edad" />
+            <span *ngIf="
+                paciente.get('edad')?.hasError('required') &&
+                paciente.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> es requerido</span>
+            <span *ngIf="
+                paciente.get('edad')?.hasError('min') &&
+                paciente.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> debe ser mayor o igual a 18 años.
+            </span>
+            <span *ngIf="
+                paciente.get('edad')?.hasError('max') &&
+                paciente.get('edad')?.touched
+              " class="text-danger">
+              La <strong>Edad</strong> debe ser menor o igual a 99 años.
+            </span>
+            <span *ngIf=" paciente.get('edad')?.hasError('soloNumeros') 
+                    && paciente.get('edad')?.touched" class="text-danger">
+              La <strong>Edad</strong> solo permiten numeros
+            </span>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="dni" class="form-label">DNI</label>
+            <input type="text" class="form-control" placeholder="Ingrese DNI" formControlName="dni" />
+            <span *ngIf="paciente.get('dni')?.hasError('required') 
+                        && paciente.get('dni')?.touched" class="text-danger">
+              El <strong>DNI</strong> es requerido
+            </span>
+            <span *ngIf=" paciente.get('dni')?.hasError('soloNumeros') 
+                        && paciente.get('dni')?.touched" class="text-danger">
+              El <strong>DNI</strong> solo permiten numeros
+            </span>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="obraSocial" class="form-label">Obra social</label>
+            <select class="form-select" aria-label="Obra Social" formControlName="obraSocial">
+              <option [ngValue]="null">Selecciona una Obra Social</option>
+              <option *ngFor="let obraSocial of obraSociales" [ngValue]="obraSocial.nombre">{{ obraSocial.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="mail" class="form-label">Correo Electronico</label>
+            <input type="text" class="form-control" placeholder="Ingrese Correo Electronico" formControlName="mail" />
+            <span *ngIf="paciente.get('mail')?.hasError('required') 
+                        && paciente.get('mail')?.touched" class="text-danger">
+              El <strong>Correo Electronico</strong> es requerido
+            </span>
+            <span *ngIf=" paciente.get('mail')?.hasError('email') 
+                        && paciente.get('mail')?.touched" class="text-danger">
+              El <strong> Correo Electronico</strong> no tiene el formato correcto.
+            </span>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" placeholder="Ingrese Contraseña" formControlName="password" />
+            <span *ngIf="paciente.get('password')?.hasError('password') 
+                        && paciente.get('password')?.touched" class="text-danger">
+              La <strong> Contraseña </strong> es requerida
+            </span>
+            <span *ngIf=" paciente.get('password')?.hasError('minlength') 
+                        && paciente.get('password')?.touched" class="text-danger">
+              La <strong> Contraseña </strong> tiene que ser mayor a 6 caracteres.
+            </span>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="image01n" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="image01n" placeholder="" (change)="uploadImage($event)" />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="image01n" class="form-label">
+              Imagen 2
+              <span class="text-muted">(Opcional)</span>
+            </label>
+            <input type="file" class="form-control" id="image01n" placeholder="" (change)="uploadImage2($event)" />
+          </div>
+        </div>
+
+        <hr class="my-4" />
+        <button class="w-100 btn btn-lg" style="background-color: #0d689d; color: white" type="submit"
+          [disabled]="!paciente.valid || (isCaptchaDisabled ? false : !isCheck)">
+          Agregar
+        </button>
+
+        <div class="captcha">
+          <button class="btnCapt mb-2" (click)="captchaOnOff()" type="button">On/Off</button>
+          <app-captcha class="btnCapt2 mb-2" [isDisabled]="isCaptchaDisabled" (captchaChange)="onCaptchaChange($event)"/>
+        </div>
+        
+
+      </form>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center vh-100" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+</div>
+
+
+
+ -->

@@ -1,0 +1,49 @@
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ data?.rol }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="onCloseModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div align="center">
+          <div class="circular-container">
+            <!-- agregar loading -->
+            <img [src]="data?.imagen" class="img-fluid" [alt]="data?.nombre" />
+          </div>
+        </div>
+        <p><strong>Nombre: </strong> {{ data?.nombre }}</p>
+        <p><strong>Apellido: </strong> {{ data?.apellido }}</p>
+        <p><strong>correo Electronico: </strong> {{ data?.mail }}</p>
+        <p><strong>DNI: </strong> {{ data?.dni }}</p>
+        <p><strong>Edad: </strong> {{ data?.edad }}</p>
+        <hr />
+        <p><strong>Especialidades</strong></p>
+        <ul class="list-group" *ngFor="let especialidad of especialidades">
+          <li class="list-group-item d-flex justify-content-start lh-sm">
+            <div>
+              <h6 class="my-0 p-2">{{ especialidad.nombre }}</h6>
+              <h6 class="my-0 p-2">{{ especialidad.description }}</h6>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="onCloseModal()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
